@@ -14,7 +14,7 @@ Roshi is [super cool](https://developers.soundcloud.com/blog/roshi-a-crdt-system
 
 
 # How To Use This Image
-Roshi uses Redis as its persistence layer. You will need to have a Redis instance running somewhere for Roshi to connect to. A production installation of Roshi should have at least 3 independent Redis clusters running in different failure domains. For demo purposes you can just run Roshi on a single Redis instance with zero fault tolerance. See [the](https://github.com/soundcloud/roshi) [various](https://github.com/soundcloud/roshi/tree/master/roshi-server) [readme's](https://github.com/soundcloud/roshi/tree/master/farm) for more details.
+Roshi uses Redis as its persistence layer. You will need to have a Redis instance running somewhere for Roshi to connect to. A production installation of Roshi should have at least 3 independent Redis clusters running in different failure domains. For demo purposes you can just run Roshi on a single Redis instance with zero fault tolerance. See the READMEs for [roshi](https://github.com/soundcloud/roshi), [roshi-server](https://github.com/soundcloud/roshi/tree/master/roshi-server), and [farm](https://github.com/soundcloud/roshi/tree/master/farm) for more details.
 
 ![Roshi architecture](https://camo.githubusercontent.com/a58ab4eb770cc1429d291d77ced4cf5f88d9154f/687474703a2f2f692e696d6775722e636f6d2f5345654b7175572e706e67)
 
@@ -24,14 +24,19 @@ Roshi uses Redis as its persistence layer. You will need to have a Redis instanc
 # Start a Redis instance named my-redis and daemonize
 docker run --name my-redis -d redis
 
-# Start a Roshi server instance named my-roshi, linked to my-redis with an alias of redis_backend, exposing port 6302 to localhost
-docker run --name my-roshi --link my-redis:redis_backend -p 6302:6302 ello/roshi-server -redis.instances=redis_backend:6379
+# Start a Roshi server instance named my-roshi-server, linked to my-redis with an alias of redis_backend, exposing port 6302 to localhost
+docker run --name my-roshi-server --link my-redis:redis_backend -p 6302:6302 ello/roshi-server -redis.instances=redis_backend:6379
 
-# In another shell you can curl /metrics to see that it's running
+# Start a Roshi walker instance named my-roshi-walker, linked to my-redis with an alias of redis_backend, exposing port 6060 to localhost for metrics
+docker run --name my-roshiwalker --link my-redis:redis_backend -p 6060:6060 ello/roshi-walker -redis.instances=redis_backend:6379
+
+# In another shell you can curl /metrics to see that both are running
 curl localhost:6302/metrics
+curl localhost:6060/metrics
 
 # If you are using boot2docker
 curl "$(boot2docker ip):6302/metrics"
+curl "$(boot2docker ip):6060/metrics"
 ```
 
 The server image includes `EXPOSE 6302` (the default Roshi port), so container linking will work.
