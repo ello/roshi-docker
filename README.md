@@ -2,9 +2,9 @@
 A minimal Docker image to run [Roshi](https://github.com/soundcloud/roshi).
 
 # `Dockerfile` links
-* [base](https://github.com/ello/roshi-docker/blob/master/Dockerfile.base)
-* [roshi-server](https://github.com/ello/roshi-docker/blob/master/Dockerfile.roshi-walker)
-* [roshi-walker](https://github.com/ello/roshi-docker/blob/master/Dockerfile.roshi-walker)
+* [base](https://github.com/ello/roshi-docker/blob/master/base/Dockerfile)
+* [roshi-server](https://github.com/ello/roshi-docker/blob/master/roshi-server/Dockerfile)
+* [roshi-walker](https://github.com/ello/roshi-docker/blob/master/roshi-walker/Dockerfile)
 
 
 # What is Roshi?
