@@ -25,7 +25,7 @@ RUN curl -Ss -o /tmp/godeb-amd64.tar.gz https://godeb.s3.amazonaws.com/godeb-amd
     rm /tmp/godeb-amd64.tar.gz
 
 # Envs
-ENV ROSHI_COMMIT="53e6bd85a0fe12befe5d0fd0888070f671cb7ddd"
+ENV ROSHI_COMMIT="4c3eb77eadb3a500ca14ac0578bd45bf5e640ddc"
 ENV GO_VERSION="1.4.2"
 
 # Install Go, build roshi-server and roshi-walker, then delete Go
